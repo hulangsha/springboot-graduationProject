@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sicau.hls.springbootgraduationproject.user.mapper.EmployeesMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.sicau.hls.springbootgraduationproject.user.entity.Employees">
+        <id column="employee_id" property="employeeId" />
+        <result column="employee_name" property="employeeName" />
+        <result column="contact_number" property="contactNumber" />
+        <result column="position" property="position" />
+        <result column="sex" property="sex" />
+        <result column="age" property="age" />
+        <result column="password" property="password" />
+        <result column="create_time" property="createTime" />
+        <result column="creator" property="creator" />
+        <result column="update_time" property="updateTime" />
+        <result column="operator" property="operator" />
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        employee_id, employee_name, contact_number, position, sex, age, password, create_time, creator, update_time, operator
+    </sql>
+    <select id="selectEmployeePerms" resultType="EmployeePerms">
+        SELECT
+        e.employee_id AS employeeId,
+        e.employee_name AS employeeName,
+        r.id AS roleId,
+        r.role_name AS roleName,
+        r.role_code AS roleCode,
+        p.id AS permsId,
+        p.perms_name AS permsName,
+        p.perms_code AS permsCode
+    FROM
+        employees e
+        INNER JOIN user_role ur ON e.employee_id = ur.user_id
+        INNER JOIN role r ON r.id = ur.role_id
+        INNER JOIN role_perms rp ON r.id = rp.role_id
+        INNER JOIN perms p ON p.id = rp.perms_id
+        where 1=1
+        <if test="employeeId != null">
+            and e.employee_id = #{employeeId}
+        </if>
+    </select>
+
+
+
+</mapper>

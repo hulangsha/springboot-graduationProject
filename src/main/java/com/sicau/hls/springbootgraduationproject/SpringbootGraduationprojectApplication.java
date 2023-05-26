@@ -1,16 +1,18 @@
 package com.sicau.hls.springbootgraduationproject;
 
 import lombok.extern.slf4j.Slf4j;
+import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
+@MapperScan("com.sicau.*.*.*.mapper")
 @Slf4j
 public class SpringbootGraduationprojectApplication {
 
     public static void main(String[] args) {
         SpringApplication.run(SpringbootGraduationprojectApplication.class, args);
-        log.info("ÎèÌ¨ÒÑ´î½¨£¬Çë¿ªÊ¼ÄãµÄ±íÑİ");
+        log.info("èˆå°å·²æ­å»ºï¼Œè¯·å¼€å§‹ä½ çš„è¡¨æ¼”");
     }
 
 }
